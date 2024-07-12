@@ -5,6 +5,8 @@ const (
 )
 
 type IncidentCreated struct {
+	Severity string `json:"severity"`
+
 	Service     string `json:"service"`
 	Environment string `json:"environment"`
 
