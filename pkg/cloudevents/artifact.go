@@ -13,22 +13,3 @@ type ArtifactSyncFailed struct {
 
 	CorrelationID *string `json:"correlation_id"`
 }
-
-type OCIArtifact struct {
-	Registry   string
-	Repository string
-	Image      string
-
-	Version string
-	Digest  string
-}
-
-type HelmArtifact struct {
-	RepoURL string
-	Chart   string
-	Version string
-}
-
-type GenericArtifact struct {
-	Infos string
-}
