@@ -47,6 +47,9 @@ type ReleaseCandidateCreated struct {
 
 	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
 
+	ViolationSummary     Summary `json:"violation_summary"`
+	VulnerabilitySummary Summary `json:"vulnerability_summary"`
+
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -92,4 +95,11 @@ type ReleaseSynced struct {
 
 	CreatedAt time.Time
 	UpdatedAt time.Time
+}
+
+type Summary struct {
+	Low      int32 `json:"low"`
+	Medium   int32 `json:"medium"`
+	High     int32 `json:"high"`
+	Critical int32 `json:"critical"`
 }
