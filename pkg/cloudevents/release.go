@@ -50,17 +50,17 @@ type ReleaseCandidateCreated struct {
 	ViolationSummary     Summary `json:"violation_summary"`
 	VulnerabilitySummary Summary `json:"vulnerability_summary"`
 
-	Metadata []ReleaseMetadata `json:"metadata"`
+	Refs []DataRef `json:"data_ref"`
 
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
-type ReleaseMetadata struct {
+type DataRef struct {
 	Name string `json:"name"`
 	Type string `json:"type"`
 
-	Ref string `json:"link"`
+	Ref string `json:"ref"`
 }
 
 type Namespace struct {
