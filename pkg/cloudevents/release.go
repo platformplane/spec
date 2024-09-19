@@ -125,7 +125,7 @@ type ReleaseDeploy struct {
 
 	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
 
-	Environment Environment `json:"environment"`
+	Environment *Environment `json:"environment"`
 }
 
 type Environment struct {
