@@ -9,6 +9,8 @@ const (
 	ReleaseCandidateCreatedType = "io.platformplane.releasecandidate.created"
 
 	ReleaseSyncedType = "io.platformplane.release.synced"
+
+	ReleaseDeployType = "io.platformplane.release.deploy"
 )
 
 type ReleaseApproved struct {
@@ -111,4 +113,26 @@ type Summary struct {
 	Medium   int32 `json:"medium"`
 	High     int32 `json:"high"`
 	Critical int32 `json:"critical"`
+}
+
+type ReleaseDeploy struct {
+	ID string `json:"id"`
+
+	Name      string     `json:"name"`
+	Namespace *Namespace `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+
+	Environment Environment `json:"environment"`
+}
+
+type Environment struct {
+	ID string `json:"id"`
+
+	Name        string `json:"name"`
+	Description string `json:"description"`
+
+	Target string `json:"target"`
 }
