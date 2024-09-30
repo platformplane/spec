@@ -115,7 +115,7 @@ type Summary struct {
 	Critical int32 `json:"critical"`
 }
 
-type DeplyomentReady struct {
+type DeploymentReady struct {
 	ID string `json:"id"`
 
 	Name      string     `json:"name"`
