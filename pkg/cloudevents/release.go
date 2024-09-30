@@ -10,7 +10,7 @@ const (
 
 	ReleaseSyncedType = "io.platformplane.release.synced"
 
-	ReleaseDeployType = "io.platformplane.release.deploy"
+	DeploymentReadyType = "io.platformplane.deployment.ready"
 )
 
 type ReleaseApproved struct {
@@ -115,7 +115,7 @@ type Summary struct {
 	Critical int32 `json:"critical"`
 }
 
-type ReleaseDeploy struct {
+type DeplyomentReady struct {
 	ID string `json:"id"`
 
 	Name      string     `json:"name"`
