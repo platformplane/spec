@@ -4,6 +4,7 @@ import "time"
 
 const (
 	ReleaseApprovedType = "io.platformplane.release.approved"
+	ReleaseRejectedType = "io.platformplane.release.rejected"
 
 	ReleaseCreatedType          = "io.platformplane.release.created"
 	ReleaseCandidateCreatedType = "io.platformplane.releasecandidate.created"
