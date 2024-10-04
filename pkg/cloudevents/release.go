@@ -3,17 +3,18 @@ package cloudevents
 import "time"
 
 const (
-	ReleaseCandidateCreatedType = "io.platformplane.releasecandidate.created"
-	ReleaseCreatedType          = "io.platformplane.release.created"
-
 	ReleaseApprovedType = "io.platformplane.release.approved"
 	ReleaseRejectedType = "io.platformplane.release.rejected"
 
-	ReleaseSyncedType   = "io.platformplane.release.synced"
+	ReleaseCreatedType          = "io.platformplane.release.created"
+	ReleaseCandidateCreatedType = "io.platformplane.releasecandidate.created"
+
+	ReleaseSyncedType = "io.platformplane.release.synced"
+
 	DeploymentReadyType = "io.platformplane.deployment.ready"
 )
 
-type Release struct {
+type ReleaseApproved struct {
 	ID string `json:"id"`
 
 	Name      string `json:"name"`
@@ -27,35 +28,35 @@ type Release struct {
 	UpdatedAt time.Time
 }
 
+type ReleaseCreated struct {
+	ID string `json:"id"`
+
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+}
+
 type ReleaseCandidateCreated struct {
-	Release
+	ID string `json:"id"`
+
+	Name string `json:"name"`
+
+	Namespace *Namespace `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
 
 	ViolationSummary     Summary `json:"violation_summary"`
 	VulnerabilitySummary Summary `json:"vulnerability_summary"`
 
 	Refs []DataRef `json:"data_ref"`
-}
 
-type ReleaseCreated struct {
-	Release
-}
-
-type ReleaseApproved struct {
-	Release
-}
-
-type ReleaseRejected struct {
-	Release
-}
-
-type ReleaseSynced struct {
-	Release
-}
-
-type DeploymentReady struct {
-	Release
-
-	Environment *Environment `json:"environment"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type DataRef struct {
@@ -94,11 +95,38 @@ type Artifact struct {
 	Digest string `json:"digest"`
 }
 
+type ReleaseSynced struct {
+	ID string `json:"id"`
+
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
 type Summary struct {
 	Low      int32 `json:"low"`
 	Medium   int32 `json:"medium"`
 	High     int32 `json:"high"`
 	Critical int32 `json:"critical"`
+}
+
+type DeploymentReady struct {
+	ID string `json:"id"`
+
+	Name      string     `json:"name"`
+	Namespace *Namespace `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+
+	Environment *Environment `json:"environment"`
 }
 
 type Environment struct {
