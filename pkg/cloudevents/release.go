@@ -28,6 +28,20 @@ type ReleaseApproved struct {
 	UpdatedAt time.Time
 }
 
+type ReleaseRejected struct {
+	ID string `json:"id"`
+
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
 type ReleaseCreated struct {
 	ID string `json:"id"`
 
