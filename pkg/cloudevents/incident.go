@@ -12,6 +12,6 @@ type IncidentCreated struct {
 
 	Description string `json:"description"`
 
-	CustomDataContent     []byte `json:"customDataContent"`
-	CustomDataContentType string `json:"customDataContentType"`
+	CustomDataContent     []byte `json:"custom_data_content"`
+	CustomDataContentType string `json:"custom_data_content_type"`
 }

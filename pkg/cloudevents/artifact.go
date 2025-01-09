@@ -7,9 +7,9 @@ const (
 type ArtifactSyncFailed struct {
 	Purl string `json:"purl"`
 
-	Message string `json:"error_message"`
+	ErrorMessage string `json:"error_message"`
 
-	LastAttempt bool `json:"lastAttempt"`
+	LastAttempt bool `json:"last_attempt"`
 
 	CorrelationID *string `json:"correlation_id"`
 }
