@@ -3,16 +3,61 @@ package cloudevents
 import "time"
 
 const (
+	ReleaseCreatedType = "io.platformplane.release.created"
+
+	ReleaseImportedType     = "io.platformplane.release.imported"
+	ReleaseImportFailedType = "io.platformplane.release.import.failed"
+
 	ReleaseApprovedType = "io.platformplane.release.approved"
 	ReleaseRejectedType = "io.platformplane.release.rejected"
-
-	ReleaseCreatedType          = "io.platformplane.release.created"
-	ReleaseCandidateCreatedType = "io.platformplane.releasecandidate.created"
 
 	ReleaseSyncedType = "io.platformplane.release.synced"
 
 	DeploymentReadyType = "io.platformplane.deployment.ready"
 )
+
+type ReleaseCreated struct {
+	ID string `json:"id"`
+
+	Name      string     `json:"name"`
+	Namespace *Namespace `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+
+	ViolationSummary     Summary `json:"violation_summary"`
+	VulnerabilitySummary Summary `json:"vulnerability_summary"`
+
+	Refs []DataRef `json:"data_ref"`
+
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+type ReleaseImported struct {
+	ID string `json:"id"`
+
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+}
+
+type ReleaseImportFailed struct {
+	ID string `json:"id"`
+
+	Name      string `json:"name"`
+	Namespace string `json:"namespace"`
+
+	Version string `json:"version"`
+
+	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+
+	ErrorMessage string `json:"error_message"`
+}
 
 type ReleaseApproved struct {
 	ID string `json:"id"`
@@ -42,7 +87,7 @@ type ReleaseRejected struct {
 	UpdatedAt time.Time
 }
 
-type ReleaseCreated struct {
+type ReleaseSynced struct {
 	ID string `json:"id"`
 
 	Name      string `json:"name"`
@@ -51,26 +96,22 @@ type ReleaseCreated struct {
 	Version string `json:"version"`
 
 	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
-type ReleaseCandidateCreated struct {
+type DeploymentReady struct {
 	ID string `json:"id"`
 
-	Name string `json:"name"`
-
+	Name      string     `json:"name"`
 	Namespace *Namespace `json:"namespace"`
 
 	Version string `json:"version"`
 
 	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
 
-	ViolationSummary     Summary `json:"violation_summary"`
-	VulnerabilitySummary Summary `json:"vulnerability_summary"`
-
-	Refs []DataRef `json:"data_ref"`
-
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	Environment *Environment `json:"environment"`
 }
 
 type DataRef struct {
@@ -109,38 +150,11 @@ type Artifact struct {
 	Digest string `json:"digest"`
 }
 
-type ReleaseSynced struct {
-	ID string `json:"id"`
-
-	Name      string `json:"name"`
-	Namespace string `json:"namespace"`
-
-	Version string `json:"version"`
-
-	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
-
-	CreatedAt time.Time
-	UpdatedAt time.Time
-}
-
 type Summary struct {
 	Low      int32 `json:"low"`
 	Medium   int32 `json:"medium"`
 	High     int32 `json:"high"`
 	Critical int32 `json:"critical"`
-}
-
-type DeploymentReady struct {
-	ID string `json:"id"`
-
-	Name      string     `json:"name"`
-	Namespace *Namespace `json:"namespace"`
-
-	Version string `json:"version"`
-
-	DeploymentUnits []DeploymentUnit `json:"deployment_units"`
-
-	Environment *Environment `json:"environment"`
 }
 
 type Environment struct {
